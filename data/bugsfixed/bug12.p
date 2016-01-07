@@ -1,3 +1,0 @@
-&SCOPED-DEFINE SW-DIARY       1
-{data/bugsfixed/bug12.i}
-DEFINE INPUT-OUTPUT PARAMETER TABLE FOR tt-Diary.

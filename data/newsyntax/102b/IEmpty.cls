@@ -1,2 +1,0 @@
-INTERFACE newsyntax.102b.IEmpty:
-END INTERFACE.
