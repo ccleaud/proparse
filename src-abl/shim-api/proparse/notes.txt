@@ -2,7 +2,7 @@
 
 Package Description
 ===================
-This packaged provides backward compatability from old C++ API into new Proparse.Net.
+This package provides backward compatability from old C++ API into new Proparse.Net.
 DO NOT USE THIS FOR NEW CODE!
 Anything using this old API can be made faster and cleaner by using
 direct access to the classes and objects in Proparse.Net.
