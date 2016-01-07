@@ -417,7 +417,7 @@ builtinfunc
 	|	PAGENUMBER^ LEFTPAREN streamname RIGHTPAREN  // also noarg
 	|	PAGESIZE_KW^ LEFTPAREN streamname RIGHTPAREN  // also noarg
 	|	rawfunc // is also a pseudfn.
-	|	SEEK^ LEFTPAREN (INPUT|OUTPUT|streamname) RIGHTPAREN // streamname, /not/ stream_name_or_handle.
+	|	SEEK^ LEFTPAREN (INPUT|OUTPUT|streamname|STREAMHANDLE expression) RIGHTPAREN // streamname, /not/ stream_name_or_handle.
 	|	substringfunc // is also a pseudfn.
 	|	SUPER^ parameterlist  // also noarg
 	|	TIMEZONE^ funargs  // also noarg
@@ -1999,6 +1999,7 @@ definedatasetstate
 		(REFERENCEONLY)?
 		FOR record (COMMA record)*
 		(data_relation ( (COMMA)? data_relation)* )?
+		( parent_id_relation ( (COMMA)? parent_id_relation)* )?
 		state_end
 	;
 data_relation
@@ -2012,6 +2013,13 @@ data_relation
 		|	RECURSIVE
 		)*
 		{if (#n != null) support.defVar(#n.getText());}
+	;
+parent_id_relation
+	:	PARENTIDRELATION^ (n:identifier)?
+		FOR record COMMA record
+		PARENTIDFIELD field
+		( PARENTFIELDSBEFORE LEFTPAREN field (COMMA field)* RIGHTPAREN)?
+		( PARENTFIELDSAFTER  LEFTPAREN field (COMMA field)* RIGHTPAREN)?
 	;
 field_mapping_phrase
 	:	RELATIONFIELDS^	LEFTPAREN

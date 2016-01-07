@@ -185,7 +185,7 @@ functioncall
 	|	#(PAGENUMBER (LEFTPAREN ID RIGHTPAREN)? )
 	|	#(PAGESIZE_KW (LEFTPAREN ID RIGHTPAREN)? )
 	|	rawfunc // is also a pseudfn.
-	|	#(SEEK LEFTPAREN (INPUT|OUTPUT|ID) RIGHTPAREN )
+	|	#(SEEK LEFTPAREN (INPUT|OUTPUT|ID|STREAMHANDLE expression) RIGHTPAREN )
 	|	substringfunc // is also a pseudfn.
 	|	#(sr:SUPER {action.callBegin(#sr);} (parameterlist)? {action.callEnd();} )
 	|	#(TIMEZONE (funargs)? )
@@ -313,6 +313,7 @@ widname
 	|	XDOCUMENT ID
 	|	XNODEREF ID
 	|	SOCKET ID
+	|	STREAM ID
 	;
 
 tbl[int contextQualifier]
@@ -677,6 +678,7 @@ definedatasetstate
 			FOR tb1:tbl[CQ.INIT] {action.datasetTable(#tb1);}
 			(COMMA tb2:tbl[CQ.INIT] {action.datasetTable(#tb2);} )*
 			( data_relation ( (COMMA)? data_relation)* )?
+			( parent_id_relation ( (COMMA)? parent_id_relation)* )?
 			state_end
 			{ action.addToSymbolScope(pop()); }
 		)
@@ -692,6 +694,16 @@ data_relation
 			)*
 		)
 	;
+parent_id_relation
+	:	#(	PARENTIDRELATION (ID)?
+			FOR tbl[CQ.INIT] COMMA tbl[CQ.INIT] // TODO Verify context qualifier
+			PARENTIDFIELD fld1[CQ.SYMBOL]       // TODO Verify context qualifier
+			( PARENTFIELDSBEFORE LEFTPAREN fld1[CQ.SYMBOL] (COMMA fld1[CQ.SYMBOL])* RIGHTPAREN)? // TODO Verify context qualifier
+			( PARENTFIELDSAFTER  LEFTPAREN fld1[CQ.SYMBOL] (COMMA fld1[CQ.SYMBOL])* RIGHTPAREN)? // TODO Verify context qualifier
+			
+		)
+	;
+
 field_mapping_phrase
 	:	#(RELATIONFIELDS LEFTPAREN fld2[CQ.SYMBOL] COMMA fld1[CQ.SYMBOL]
 		( COMMA fld2[CQ.SYMBOL] COMMA fld1[CQ.SYMBOL] )* RIGHTPAREN )

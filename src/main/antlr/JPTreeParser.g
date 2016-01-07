@@ -413,7 +413,7 @@ functioncall
 	|	#(PAGENUMBER (LEFTPAREN ID RIGHTPAREN)? )
 	|	#(PAGESIZE_KW (LEFTPAREN ID RIGHTPAREN)? )
 	|	rawfunc // is also a pseudfn.
-	|	#(SEEK LEFTPAREN (INPUT|OUTPUT|ID) RIGHTPAREN )
+	|	#(SEEK LEFTPAREN (INPUT|OUTPUT|ID||STREAMHANDLE expression) RIGHTPAREN )
 	|	substringfunc // is also a pseudfn.
 	|	#(SUPER (parameterlist)? )
 	|	#(TIMEZONE (funargs)? )
@@ -1409,6 +1409,7 @@ definedatasetstate
 			(REFERENCEONLY)?
 			FOR RECORD_NAME (COMMA RECORD_NAME)*
 			( data_relation ( (COMMA)? data_relation)* )?
+			( parent_id_relation ( (COMMA)? parent_id_relation)* )?
 			state_end
 		)
 	;
@@ -1421,6 +1422,14 @@ data_relation
 			|	NOTACTIVE
 			|	RECURSIVE
 			)*
+		)
+	;
+parent_id_relation
+	:	#(	PARENTIDRELATION (ID)?
+			FOR RECORD_NAME COMMA RECORD_NAME
+			PARENTIDFIELD field
+			( PARENTFIELDSBEFORE LEFTPAREN field (COMMA field)* RIGHTPAREN)?
+			( PARENTFIELDSAFTER  LEFTPAREN field (COMMA field)* RIGHTPAREN)?
 		)
 	;
 field_mapping_phrase
