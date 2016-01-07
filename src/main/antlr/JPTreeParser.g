@@ -413,7 +413,7 @@ functioncall
 	|	#(PAGENUMBER (LEFTPAREN ID RIGHTPAREN)? )
 	|	#(PAGESIZE_KW (LEFTPAREN ID RIGHTPAREN)? )
 	|	rawfunc // is also a pseudfn.
-	|	#(SEEK LEFTPAREN (INPUT|OUTPUT|ID||STREAMHANDLE expression) RIGHTPAREN )
+	|	#(SEEK LEFTPAREN (INPUT|OUTPUT|ID|STREAMHANDLE expression) RIGHTPAREN )
 	|	substringfunc // is also a pseudfn.
 	|	#(SUPER (parameterlist)? )
 	|	#(TIMEZONE (funargs)? )
