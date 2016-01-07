@@ -1,0 +1,15 @@
+  .jar --> .dll conversion
+----------------------------
+
+1. build the project
+
+2. go to "output" directory and copy "lib" directory and "proparse-xxx.jar" file
+3. paste in an empty temporary directory
+
+4. copy "proparse.snk" file (same directory as this text file)
+5. paste the file in the temporary directory
+
+6. open a command prompt on that directory
+7. use this command line "ikvmc.exe  -out:proparse.net.dll  -keyfile:proparse.snk  -version:4.0.1.1130  proparse-1.0.jar  .\lib\*"
+
+8. enjoy!
