@@ -694,6 +694,10 @@ public class TokenTypes implements JPTreeParserTokenTypes, TokenTypesI {
 		allTokens[PAGED].keywordText = "PAGED";
 		allTokens[PARAMETER].keywordText = "PARAMETER";
 		allTokens[PARENT].keywordText = "PARENT";
+		allTokens[PARENTFIELDSAFTER].keywordText = "PARENT-FIELDS-AFTER";
+		allTokens[PARENTFIELDSBEFORE].keywordText = "PARENT-FIELDS-BEFORE";
+		allTokens[PARENTIDFIELD].keywordText = "PARENT-ID-FIELD";
+		allTokens[PARENTIDRELATION].keywordText = "PARENT-ID-RELATION";
 		allTokens[PARTIALKEY].keywordText = "PARTIAL-KEY";
 		allTokens[PASCAL_KW].keywordText = "PASCAL";
 		allTokens[PAUSE].keywordText = "PAUSE";

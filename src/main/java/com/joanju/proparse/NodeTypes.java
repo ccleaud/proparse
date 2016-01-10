@@ -1082,6 +1082,10 @@ public class NodeTypes implements ProParserTokenTypes, TokenTypesI, Xferable {
 		add(PAGEWIDTH, 8, "page-width", TI.KEYWORD);
 		add(PARAMETER, 5, "parameter", TI.KEYWORD | TI.RESERVED);
 		add(PARENT, 6, "parent", TI.KEYWORD);
+		add(PARENTFIELDSAFTER, 19, "parent-fields-after", TI.KEYWORD);
+		add(PARENTFIELDSBEFORE, 20, "parent-fields-before", TI.KEYWORD);
+		add(PARENTIDFIELD, 15, "parent-id-field", TI.KEYWORD);
+		add(PARENTIDRELATION, 18, "parent-id-relation", TI.KEYWORD);
 		add(PARTIALKEY, 11, "partial-key", TI.KEYWORD);
 		add(PASCAL_KW, 6, "pascal", TI.KEYWORD);
 		add(PASSWORDFIELD, 14, "password-field", TI.KEYWORD | TI.RESERVED);
