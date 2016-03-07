@@ -45,7 +45,7 @@ public class Lexer implements ProParserTokenTypes {
 	private static final int EOF_CHAR = Preprocessor.EOF_CHAR;
 
 
-	
+
 
 //////////////// Lexical productions listed first, support functions follow.
 
@@ -89,7 +89,7 @@ public class Lexer implements ProParserTokenTypes {
 			textStartSource = prepro.getSourceNum();
 			currText.setLength(1);
 			currText.setCharAt(0, (char)currInt);
-			
+
 			if (gettingAmpIfDefArg) {
 				getChar();
 				gettingAmpIfDefArg = false;
@@ -122,6 +122,8 @@ public class Lexer implements ProParserTokenTypes {
 				getChar();
 				if (currChar=='*') {
 					return comment();
+				} else if (currChar == '/') {
+					return singleComment();
 				} else if (currChar=='(' || currIsSpace()) {
 					// slash (division) can only be followed by whitespace or '('
 					// ...that's what I found empirically, anyway. (jag 2003/05/09)
@@ -250,8 +252,8 @@ public class Lexer implements ProParserTokenTypes {
 			}
 		}
 	}
-	
-	
+
+
 	/** Get argument for &IF DEFINED(...).
 	 * The nextToken function is necessarily the main entry point. This is just
 	 * a wrapper around that.
@@ -260,19 +262,19 @@ public class Lexer implements ProParserTokenTypes {
 		gettingAmpIfDefArg = true;
 		return nextToken();
 	}
-	
-	
+
+
 	/** Get the text between the parens for &IF DEFINED(...).
 	 * The compiler seems to allow any number of tokens between the parens,
 	 * and like with an &Name reference, it allows embedded comments.
 	 * Here, I'm allowing for the embedded comments and just gathering all the text
 	 * up to the closing paren. Hopefully that will do it.
-	 * 
+	 *
 	 * The compiler doesn't seem to ignore extra tokens. For example, &if defined(ab cd)
 	 * does not match a macro named "ab". It doesn't match "abcd" either, so all I can guess
 	 * is that they are combining the text of all the tokens between the parens.
 	 * I haven't found any macro name that matches &if defined(ab"cd").
-	 * 
+	 *
 	 * The compiler works different here than it does for a typical ID token.
 	 * An ID token (like a procedure name) may contain arbitrary quotation marks.
 	 * Within an &if defined() function, the quotation marks must match.
@@ -374,6 +376,23 @@ public class Lexer implements ProParserTokenTypes {
 		prepro.doingComment = false;
 		getChar();
 		return makeToken(COMMENT);
+	}
+
+
+	ProToken singleComment() throws IOException {
+		// Single line comments are treated just like regular comments,
+		// everything till end of line is considered comment - no escape
+		// character to look after
+
+		append(); // currChar=='/'
+
+		while (true) {
+			getChar();
+			unEscapedAppend();
+			if (currChar == '\r' || currChar == '\n' || currInt == EOF_CHAR) {
+				return makeToken(COMMENT);
+			}
+		}
 	}
 
 
