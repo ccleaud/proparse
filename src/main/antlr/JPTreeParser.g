@@ -1406,6 +1406,7 @@ definedatasetstate
 	:	#(	DEFINE (def_shared)? def_modifiers DATASET ID
 			(namespace_uri)? (namespace_prefix)? (xml_node_name)?
 			( #(SERIALIZENAME QSTRING) )?
+			(SERIALIZEHIDDEN)?
 			(REFERENCEONLY)?
 			FOR RECORD_NAME (COMMA RECORD_NAME)*
 			( data_relation ( (COMMA)? data_relation)* )?
