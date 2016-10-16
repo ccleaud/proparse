@@ -1227,7 +1227,7 @@ createsoapheaderentryrefstate
 	;
 
 createsocketstate
-	:	#(CREATE SOCKET field (NOERROR_KW)? state_end )
+	: #(CREATE SOCKET (field | widattr) (NOERROR_KW)? state_end )
 	;
 
 createtemptablestate

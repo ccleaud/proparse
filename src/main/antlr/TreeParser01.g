@@ -561,7 +561,7 @@ createserversocketstate
 	;
 
 createsocketstate
-	:	#(CREATE SOCKET fld[CQ.UPDATING] (NOERROR_KW)? state_end )
+	:	#(CREATE SOCKET (fld[CQ.UPDATING] | widattr) (NOERROR_KW)? state_end )
 	;
 
 createtemptablestate
