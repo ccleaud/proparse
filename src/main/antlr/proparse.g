@@ -1748,7 +1748,7 @@ createserversocketstate
 	;
 
 createsocketstate
-	:	CREATE^ SOCKET field (NOERROR_KW)? state_end
+	:	CREATE^ SOCKET exprt (NOERROR_KW)? state_end
 		{sthd(##,SOCKET);}
 	;
 

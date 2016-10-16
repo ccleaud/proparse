@@ -10,6 +10,6 @@
 5. paste the file in the temporary directory
 
 6. open a command prompt on that directory
-7. use this command line "ikvmc.exe  -out:proparse.net.dll  -keyfile:proparse.snk  -version:4.0.1.1133  proparse-1.0.jar  .\lib\*"
+7. use this command line "ikvmc.exe  -out:proparse.net.dll  -keyfile:proparse.snk  -version:4.0.1.1134  proparse-1.0.jar  .\lib\*"
 
 8. enjoy!
