@@ -1996,6 +1996,7 @@ button_opt
 definedatasetstate
 	:	DATASET identifier
 		(namespace_uri)? (namespace_prefix)? (xml_node_name)? (serialize_name)?
+		(SERIALIZEHIDDEN)?
 		(REFERENCEONLY)?
 		FOR record (COMMA record)*
 		(data_relation ( (COMMA)? data_relation)* )?
